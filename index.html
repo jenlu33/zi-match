@@ -3,16 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./src/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
   <title>Zi Match</title>
 </head>
 <body>
-  <h1>Zi Match</h1>
-  <div>
-    <h3>Let's learn some zi!</h3>
-    <div>
-      <button>Study</button>
-      <button>Play</button>
+  <div class="header">
+    <h1 class="title">Zi Match</h1>
+    <h3 class="sub-title">Let's learn some zi!</h3>
+    <div class="option-btns">
+      <button id="study-btn" class="option-btn" onclick="active()">Study</button>
+      <button id="play-btn" class="option-btn">Play</button>
     </div>
   </div>
+  <div class="display">
+
+    <!----- STUDY ----->
+    <div id="studying" class="none">
+      <h1 >Studying!</h1>
+      <div>
+
+      </div>
+    </div>
+
+    <!----- PLAY ----->
+    <div id="playing" class="none">
+      <h1>Playing!</h1>
+    </div>
+  </div>
+
+  <script src="./src/index.js"></script>
 </body>
 </html>

@@ -1,0 +1,93 @@
+* { /* RESET */
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Indie Flower', cursive; */
+}
+
+.header {
+  /* font-family: 'Indie Flower', cursive; */
+  width: 100vw;
+  padding: 15px 0 20px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(71, 144, 255);
+  color: white;
+}
+
+.title {
+  /* font-family: 'Indie Flower', cursive; */
+  font-family: 'Amatic SC', cursive;
+  font-weight: 700;
+  font-size: 3em;
+}
+
+.sub-title {
+  font-family: 'Amatic SC', cursive;
+  font-size: 2em;
+}
+
+.option-btns {
+  /* border: 1px solid red; */
+  margin-top: 10px;
+  width: 300px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#study-btn, #play-btn {
+  /* font-family: 'Raleway', sans-serif; */
+  font-family: 'Amatic SC', cursive;
+  /* font-weight: 700; */
+  font-size: 1.5em;
+  padding: 5px 20px;
+  background:none;
+  color: white;
+}
+
+.option-btn {
+  border: 2px solid rgba(0, 0, 0, 0)
+}
+
+.clicked {
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.option-btn:hover, .clicked:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition-duration: 0.3s;
+}
+
+.clicked:focus {
+  outline: none;
+}
+
+.display {
+  /* border: 1px solid red; */
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 85vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(205, 225, 252);
+}
+
+.none {
+  display: none;
+};
+
+.show {
+  display: block;
+}
