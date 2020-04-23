@@ -28,26 +28,35 @@ studyBtn.addEventListener("click", displayStudyToggle);
 // ----- Shows dictionary entries -----
 function displayStudyWords(DICTIONARY) {
   DICTIONARY.map(word => {
-      let dChar = document.createElement("div");
-      dChar.className = "display-char"
-
-      const writer = HanziWriter.create(dChar, word.character, {
+    let entries = document.getElementById("entries");
+    let dChar = document.createElement("div");
+    let entry = document.createElement("div");
+    
+    dChar.className = "display-char"
+    entry.className = "entry";
+  
+    chars = word.character;
+    for(let i = 0; i < chars.length; i++) {
+      const writer = HanziWriter.create(dChar, chars[i], {
         width: 45,
         height: 45,
-        padding: 5
+        padding: 0
       });
-
-      let entries = document.getElementById("entries");
-      let entry = document.createElement("div");
-      entry.className = "entry";
-      let dDef = document.createElement("div");
-      dDef.className = "definition";
-      dDef.innerHTML = word.definition;
-      
       entry.appendChild(dChar);
-      entry.appendChild(dDef);
-      entries.appendChild(entry);
-    });
+    };
+
+    let dDef = document.createElement("div");
+    dDef.className = "definition";
+    dDef.innerHTML = word.definition;
+
+    let dPronounce = document.createElement("div");
+    dPronounce.className = "pronounciation";
+    dPronounce.innerHTML = word.pronounciation;
+
+    entry.appendChild(dPronounce);
+    entry.appendChild(dDef);
+    entries.appendChild(entry);
+  });
 };
 
 studyBtn.addEventListener("click", displayStudyWords(DICTIONARY));
