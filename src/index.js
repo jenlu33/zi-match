@@ -6,13 +6,13 @@ const playing = document.getElementById('playing');
 // let study = false;
 // let play = false;
 
-// ------- STUDY -------
+// -------------- STUDY --------------
 
 function clickedStudyToggle() {
   studyBtn.classList.toggle("clicked");
   studyBtn.classList.toggle("option-btn");
   playBtn.classList.value = "option-btn";
-}
+};
 
 studyBtn.addEventListener("click", clickedStudyToggle)
 
@@ -24,24 +24,35 @@ function displayStudyToggle() {
 
 studyBtn.addEventListener("click", displayStudyToggle);
 
-function studyWords(DICTIONARY) {
 
-  if (studying.classList.value === "none") {
-    DICTIONARY.map(word => {
-      console.log(word.character);
-      const writer = HanziWriter.create('display-dictionary', word.character, {
+// ----- Shows dictionary entries -----
+function displayStudyWords(DICTIONARY) {
+  DICTIONARY.map(word => {
+      let dChar = document.createElement("div");
+      dChar.className = "display-char"
+
+      const writer = HanziWriter.create(dChar, word.character, {
         width: 45,
         height: 45,
         padding: 5
-
       });
-      // wordsList.append(character);
-      // wordsList.append(definition);
+
+      let entries = document.getElementById("entries");
+      let entry = document.createElement("div");
+      entry.className = "entry";
+      let dDef = document.createElement("div");
+      dDef.className = "definition";
+      dDef.innerHTML = word.definition;
+      
+      entry.appendChild(dChar);
+      entry.appendChild(dDef);
+      entries.appendChild(entry);
     });
-  };
 };
 
-// ------- PLAY -------
+studyBtn.addEventListener("click", displayStudyWords(DICTIONARY));
+
+// -------------- PLAY --------------
 
 function clickedPlayToggle() {
   playBtn.classList.toggle("clicked");
