@@ -12,23 +12,26 @@
     <h1 class="title">Zi Match</h1>
     <h3 class="sub-title">Let's learn some zi!</h3>
     <div class="option-btns">
-      <button id="study-btn" class="option-btn" onclick="active()">Study</button>
+      <button id="study-btn" class="option-btn">Study</button>
       <button id="play-btn" class="option-btn">Play</button>
     </div>
   </div>
-  <div class="display">
 
+  <div class="display">
     <!----- STUDY ----->
     <div id="studying" class="none">
       <h1 >Studying!</h1>
       <div>
-
+        <p>A Chinese -> English dictionary will be shown here</p>
       </div>
     </div>
 
     <!----- PLAY ----->
     <div id="playing" class="none">
       <h1>Playing!</h1>
+      <div id="instructions" class="play-instructions">
+        <p>Match as many words as you can! Don't worry, you can always go back to study</p>
+      </div>
     </div>
   </div>
 
