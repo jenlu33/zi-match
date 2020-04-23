@@ -24,6 +24,23 @@ function displayStudyToggle() {
 
 studyBtn.addEventListener("click", displayStudyToggle);
 
+function studyWords(DICTIONARY) {
+
+  if (studying.classList.value === "none") {
+    DICTIONARY.map(word => {
+      console.log(word.character);
+      const writer = HanziWriter.create('display-dictionary', word.character, {
+        width: 45,
+        height: 45,
+        padding: 5
+
+      });
+      // wordsList.append(character);
+      // wordsList.append(definition);
+    });
+  };
+};
+
 // ------- PLAY -------
 
 function clickedPlayToggle() {

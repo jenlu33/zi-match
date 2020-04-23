@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./src/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.2/dist/hanzi-writer.min.js"></script>
+  <script src="./src/dictionary.js"></script>
   <title>Zi Match</title>
 </head>
 <body>
@@ -12,7 +14,7 @@
     <h1 class="title">Zi Match</h1>
     <h3 class="sub-title">Let's learn some zi!</h3>
     <div class="option-btns">
-      <button id="study-btn" class="option-btn">Study</button>
+      <button id="study-btn" class="option-btn" onclick="studyWords(DICTIONARY)">Study</button>
       <button id="play-btn" class="option-btn">Play</button>
     </div>
   </div>
@@ -21,8 +23,9 @@
     <!----- STUDY ----->
     <div id="studying" class="none">
       <h1 >Studying!</h1>
-      <div>
+      <div class="dictionary">
         <p>A Chinese -> English dictionary will be shown here</p>
+        <p id="display-dictionary"></p>
       </div>
     </div>
 

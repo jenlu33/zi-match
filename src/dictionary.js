@@ -1,0 +1,22 @@
+const DICTIONARY = [
+  {"character":"的", "pronounciation":"de", "definition":"(possesive particle), of / really and truly / aim, clear"},
+  {"character":"一", "pronounciation":"yī / yì ／yí","definition":"one / single"},
+  {"character":"是", "pronounciation":"shì", "definition":"is / are / am / yes"},
+  // "不 (bù)":"(negative prefix), no, not",
+  // "了 (le／liǎo)":"((modal particle intensifying preceding clause), (past tense marker) / to know, to understand, to know",
+  // "人 (rén)":"man/person/people",
+  // "我 (wǒ)":"I / me / myself",
+  // "在 (zài)":"(located) in/at",
+  // "有 (yǒu)":"to have / there is / there are / to exist",
+  // "他 (tā)":"he / him",
+  // "這 (zhè)":"this / these",
+  // "為 (wéi / wèi)":"act as / to be / to do / to serve / to be / because of",
+  // "之 (zhī)":"him / her / it",
+  // "大 (dà)":"big",
+  // "來 (lái)":"to come",
+  // "以 (yǐ)":"to use / according to / because of",
+  // "個 (gè)":"(a measure word), individual",
+  // "中 (zhōng)":"middle / center / within / among / in",
+  // "上 (shàng)":"above / on / over / top",
+  // "們 (men)":"(plural marker for pronouns and a few animate nouns)"
+];
