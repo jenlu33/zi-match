@@ -3,9 +3,6 @@ const playBtn = document.getElementById('play-btn');
 const studying = document.getElementById('studying');
 const playing = document.getElementById('playing');
 
-// let study = false;
-// let play = false;
-
 // -------------- STUDY --------------
 
 function clickedStudyToggle() {
@@ -14,7 +11,7 @@ function clickedStudyToggle() {
   playBtn.classList.value = "option-btn";
 };
 
-studyBtn.addEventListener("click", clickedStudyToggle)
+studyBtn.addEventListener("click", clickedStudyToggle);
 
 function displayStudyToggle() {
   studying.classList.toggle("none");
@@ -24,8 +21,6 @@ function displayStudyToggle() {
 
 studyBtn.addEventListener("click", displayStudyToggle);
 
-
-// ----- Shows dictionary entries -----
 function displayStudyWords(DICTIONARY) {
   DICTIONARY.map(word => {
     let entries = document.getElementById("entries");
@@ -67,9 +62,9 @@ function clickedPlayToggle() {
   playBtn.classList.toggle("clicked");
   playBtn.classList.toggle("option-btn");
   studyBtn.classList.value = "option-btn";
-}
+};
 
-playBtn.addEventListener("click", clickedPlayToggle)
+playBtn.addEventListener("click", clickedPlayToggle);
 
 function displayPlayToggle() {
   playing.classList.toggle("none");
@@ -78,5 +73,27 @@ function displayPlayToggle() {
 };
 
 playBtn.addEventListener("click", displayPlayToggle);
+
+
+function createCards(DICTIONARY) {
+  const dictionary = DICTIONARY.slice();
+  const cards = [];
+  
+  for (let i = 0; i < 6; i++){
+    const length = dictionary.length;
+    let card =  dictionary[Math.floor(Math.random() * length)];
+    cards.push(card);
+
+    dictionary.splice(dictionary.indexOf(card), 1);
+  }
+  console.log(cards);
+  
+};
+
+function displayCards(cards) {
+
+}
+
+playBtn.addEventListener("click", createCards(DICTIONARY));
 
 
