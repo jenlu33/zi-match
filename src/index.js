@@ -1,3 +1,4 @@
+
 const studyBtn = document.getElementById('study-btn');
 const playBtn = document.getElementById('play-btn');
 const studying = document.getElementById('studying');
@@ -76,72 +77,81 @@ function displayPlayToggle() {
 playBtn.addEventListener("click", displayPlayToggle);
 
 
-// let charCards = [];
-// let defCards = [];
+let charCards = [];
+let defCards = [];
 let cards = [];
 
 function createCards(DICTIONARY) {
   charCards = [];
   defCards = [];
-  cards = [];
   const dictionary = DICTIONARY.slice();
   
   for (let i = 0; i < 6; i++){
     const length = dictionary.length;
     let card =  dictionary[Math.floor(Math.random() * length)];
-    cards.push(card.character);
-    cards.push(card.definition);
+    charCards.push(card.character);
+    defCards.push(card.definition);
 
     dictionary.splice(dictionary.indexOf(card), 1);
   }
-  // console.log(charCards);
-  // console.log(defCards);
-  console.log(cards);
-  
+  cards = { charCards, defCards };
+  // console.log(cards);
+  return cards;
 };
 
-let deck = [];
+playBtn.addEventListener("click", createCards(DICTIONARY));
+
 function shuffle(cards){
-  deck = []
-
-  for(let i = cards.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * i);
-    deck.push(charCards[i])
-  };
-  console.log(deck);
-};
-
-newGame.addEventListener("click", shuffle(cards));
-
-function displayCards(charCards) {
+  shuffled = cards.slice(0);
+  console.log(shuffled);
   
+  
+  for(let i = shuffled.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * i);
+    const temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  };
+  console.log(shuffled);
+  return shuffled;
+}
 
-  // cards.map(card => {
-  //   let board = document.getElementById("board");
-  //   let char = document.createElement("div");
-  //   let def = document.createElement("div");
+// newGame.addEventListener("click", shuffle(cards));
 
-  //   char.id = card.id;
-  //   def.id = card.id;
-  //   char.className = "charCard";
-  //   def.className = "defCard";
+function displayCards(cards) {
+  cards.charCards.map(card => {
+    let board = document.getElementById("board");
+    let char = document.createElement("div");
+    
+    char.id = card.id;
+    char.className = "charCard";
+    
+    for (let i = 0; i < card.length; i++) {
+      const writer = HanziWriter.create(char, card[i], {
+        width: 30,
+        height: 30,
+        padding: 0
+      });
+      board.appendChild(char);
+    };
+    
+  });
 
-  //   chars = card.character;
-  //   for (let i = 0; i < chars.length; i++) {
-  //     const writer = HanziWriter.create(char, chars[i], {
-  //       width: 30,
-  //       height: 30,
-  //       padding: 0
-  //     });
-  //     board.appendChild(char);
-  //   };
-  //   def.innerHTML = card.definition;
-  //   board.appendChild(def)
-  // });
+  let shuffleDef = shuffle(cards.defCards); 
+
+  shuffleDef.map(card => {
+    let board = document.getElementById("board");
+    let def = document.createElement("div");
+
+    def.id = card.id;
+    def.className = "defCard";
+
+    def.innerHTML = card;
+    board.appendChild(def)
+  })
 };
 
-// playBtn.addEventListener("click", displayCards(charCards))
-
+playBtn.addEventListener("click", displayCards(cards))
 
 
 
