@@ -75,25 +75,59 @@ function displayPlayToggle() {
 playBtn.addEventListener("click", displayPlayToggle);
 
 
+const charCards = [];
+const defCards = [];
+
 function createCards(DICTIONARY) {
   const dictionary = DICTIONARY.slice();
-  const cards = [];
   
   for (let i = 0; i < 6; i++){
     const length = dictionary.length;
     let card =  dictionary[Math.floor(Math.random() * length)];
-    cards.push(card);
+    charCards.push(card.character);
+    defCards.push(card.definition);
 
     dictionary.splice(dictionary.indexOf(card), 1);
   }
-  console.log(cards);
+  console.log(charCards);
+  console.log(defCards);
+};
+
+playBtn.addEventListener("click", createCards(DICTIONARY));
+
+function shuffle(charCards, defCards){
   
 };
 
-function displayCards(cards) {
+function displayCards(charCards) {
+  
 
-}
+  // cards.map(card => {
+  //   let board = document.getElementById("board");
+  //   let char = document.createElement("div");
+  //   let def = document.createElement("div");
 
-playBtn.addEventListener("click", createCards(DICTIONARY));
+  //   char.id = card.id;
+  //   def.id = card.id;
+  //   char.className = "charCard";
+  //   def.className = "defCard";
+
+  //   chars = card.character;
+  //   for (let i = 0; i < chars.length; i++) {
+  //     const writer = HanziWriter.create(char, chars[i], {
+  //       width: 30,
+  //       height: 30,
+  //       padding: 0
+  //     });
+  //     board.appendChild(char);
+  //   };
+  //   def.innerHTML = card.definition;
+  //   board.appendChild(def)
+  // });
+};
+
+// playBtn.addEventListener("click", displayCards(charCards))
+
+
 
 
