@@ -2,6 +2,7 @@ const studyBtn = document.getElementById('study-btn');
 const playBtn = document.getElementById('play-btn');
 const studying = document.getElementById('studying');
 const playing = document.getElementById('playing');
+const newGame = document.getElementById('new-game-btn');
 
 // -------------- STUDY --------------
 
@@ -75,29 +76,42 @@ function displayPlayToggle() {
 playBtn.addEventListener("click", displayPlayToggle);
 
 
-const charCards = [];
-const defCards = [];
+// let charCards = [];
+// let defCards = [];
+let cards = [];
 
 function createCards(DICTIONARY) {
+  charCards = [];
+  defCards = [];
+  cards = [];
   const dictionary = DICTIONARY.slice();
   
   for (let i = 0; i < 6; i++){
     const length = dictionary.length;
     let card =  dictionary[Math.floor(Math.random() * length)];
-    charCards.push(card.character);
-    defCards.push(card.definition);
+    cards.push(card.character);
+    cards.push(card.definition);
 
     dictionary.splice(dictionary.indexOf(card), 1);
   }
-  console.log(charCards);
-  console.log(defCards);
-};
-
-playBtn.addEventListener("click", createCards(DICTIONARY));
-
-function shuffle(charCards, defCards){
+  // console.log(charCards);
+  // console.log(defCards);
+  console.log(cards);
   
 };
+
+let deck = [];
+function shuffle(cards){
+  deck = []
+
+  for(let i = cards.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * i);
+    deck.push(charCards[i])
+  };
+  console.log(deck);
+};
+
+newGame.addEventListener("click", shuffle(cards));
 
 function displayCards(charCards) {
   
