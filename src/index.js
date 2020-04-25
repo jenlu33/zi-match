@@ -3,7 +3,7 @@ const studyBtn = document.getElementById('study-btn');
 const playBtn = document.getElementById('play-btn');
 const studying = document.getElementById('studying');
 const playing = document.getElementById('playing');
-const newGame = document.getElementById('new-game-btn');
+const newGameBtn = document.getElementById('new-game-btn');
 
 // -------------- STUDY --------------
 
@@ -77,34 +77,29 @@ function displayPlayToggle() {
 playBtn.addEventListener("click", displayPlayToggle);
 
 
-let charCards = [];
-let defCards = [];
 let cards = [];
 
 function createCards(DICTIONARY) {
-  charCards = [];
-  defCards = [];
+  let charCards = [];
+  let defCards = [];
   const dictionary = DICTIONARY.slice();
   
   for (let i = 0; i < 6; i++){
     const length = dictionary.length;
     let card =  dictionary[Math.floor(Math.random() * length)];
-    charCards.push(card.character);
-    defCards.push(card.definition);
+    charCards.push({id: card.id, character:card.character});
+    defCards.push({ id: card.id, definition:card.definition});
 
     dictionary.splice(dictionary.indexOf(card), 1);
   }
   cards = { charCards, defCards };
-  // console.log(cards);
   return cards;
 };
 
-playBtn.addEventListener("click", createCards(DICTIONARY));
+// playBtn.addEventListener("click", createCards(DICTIONARY));
 
-function shuffle(cards){
-  shuffled = cards.slice(0);
-  console.log(shuffled);
-  
+function shuffle(defCards){
+  shuffled = defCards.slice(0);
   
   for(let i = shuffled.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * i);
@@ -112,22 +107,21 @@ function shuffle(cards){
     shuffled[i] = shuffled[j];
     shuffled[j] = temp;
   };
-  console.log(shuffled);
   return shuffled;
 }
 
-// newGame.addEventListener("click", shuffle(cards));
-
-function displayCards(cards) {
+function displayCards() {
+  
   cards.charCards.map(card => {
     let board = document.getElementById("board");
     let char = document.createElement("div");
     
     char.id = card.id;
     char.className = "charCard";
+    ch = card.character;
     
-    for (let i = 0; i < card.length; i++) {
-      const writer = HanziWriter.create(char, card[i], {
+    for (let i = 0; i < ch.length; i++) {
+      const writer = HanziWriter.create(char, ch[i], {
         width: 30,
         height: 30,
         padding: 0
@@ -146,12 +140,28 @@ function displayCards(cards) {
     def.id = card.id;
     def.className = "defCard";
 
-    def.innerHTML = card;
+    def.innerHTML = card.definition;
     board.appendChild(def)
   })
 };
 
-playBtn.addEventListener("click", displayCards(cards))
+// playBtn.addEventListener("click", displayCards(cards));
+
+function newGame() {
+  
+  board = document.getElementById("board")
+  // if (document.getElementsByClassName("charCard")) {
+  //   charCard = document.getElementsByClassName("charCard");
+  //   charCard.parentNode = board;
+  //   console.log(charCard.parentNode);
+    
+  // }
+  // charCard.parentNode.removeChild(charCard);
+  createCards(DICTIONARY);
+  displayCards();
+  // console.log(cards);
+  
+};
 
 
 

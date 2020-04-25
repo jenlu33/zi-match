@@ -1,0 +1,48 @@
+#playing {
+  /* border: 1px solid red; */
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#board {
+  /* border: 1px solid red; */
+  height: 60vh;
+  min-width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#new-game-btn{
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+#new-game-btn:hover{
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#new-game-btn:focus{
+  outline: none;
+  border: 2px inset rgb(131, 174, 255);
+  border-radius: 5px;
+}
+
+.charCard, .defCard {
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 10px;
+  height: 120px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
