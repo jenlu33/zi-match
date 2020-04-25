@@ -73,3 +73,8 @@
   border-radius: 5px;
   cursor: default;
 }
+
+.no-match, .no-match:hover {
+  border: 2px solid red;
+  border-radius: 5px;
+}

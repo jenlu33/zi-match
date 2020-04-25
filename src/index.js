@@ -4,6 +4,7 @@ const playBtn = document.getElementById('play-btn');
 const studying = document.getElementById('studying');
 const playing = document.getElementById('playing');
 const newGameBtn = document.getElementById('new-game-btn');
+const board = document.getElementById("board")
 
 // -------------- STUDY --------------
 
@@ -115,10 +116,8 @@ function shuffle(defCards){
 function displayCards() {
   
   cards.charCards.map(card => {
-    let board = document.getElementById("board");
-    let charCon = document.getElementById("char-container");
-    
-    let char = document.createElement("div");
+    const charCon = document.getElementById("char-container");
+    const char = document.createElement("div");
     
     charCon.className = "char-container"
     char.id = card.id;
@@ -139,9 +138,8 @@ function displayCards() {
   let shuffleDef = shuffle(cards.defCards); 
 
   shuffleDef.map(card => {
-    let board = document.getElementById("board");
-    let defCon = document.getElementById("def-container");
-    let def = document.createElement("div");
+    const defCon = document.getElementById("def-container");
+    const def = document.createElement("div");
 
     defCon.className = "def-container"
     def.id = card.id;
@@ -155,9 +153,9 @@ function displayCards() {
 
 // playBtn.addEventListener("click", displayCards(cards));
 
-function newGame() {
+function startGame() {
   
-  board = document.getElementById("board")
+  
   // if (document.getElementsByClassName("charCard")) {
   //   charCard = document.getElementsByClassName("charCard");
   //   charCard.parentNode = board;
@@ -168,14 +166,15 @@ function newGame() {
   createCards(DICTIONARY);
   displayCards();
 
+  
   board.addEventListener("click", e => {select(e)});
  
 };
 
+newGameBtn.addEventListener("click", startGame());
 
 let currentCard;
 let nextCard;
-
 
 function select(e) {
   selected = e.target;
@@ -194,8 +193,6 @@ function select(e) {
   
   if (currentCard && nextCard){
     compare(currentCard, nextCard);
-    currentCard.classList.toggle("unselect");
-    nextCard.classList.toggle("unselect");
     currentCard = null;
     nextCard = null;
   }
@@ -203,20 +200,25 @@ function select(e) {
 
 function compare(currentCard, nextCard) {
   if (currentCard.id === nextCard.id){
-    console.log("match!");
     currentCard.classList.toggle("match")
     nextCard.classList.toggle("match");
   } else {
-    console.log("no match");
+    currentCard.classList.toggle("no-match");
+    nextCard.classList.toggle("no-match");
+    setTimeout(() => {
+      currentCard.classList.value = "card";
+      nextCard.classList.value = "card";
+    }, 500)
   }
   
 };
 
-function match() {
-  if(currentCard === nextCard){
-    console.log("match!");
-    
-  }
+function endGame() {
+
+};
+
+function restart() {
+
 };
 
 
