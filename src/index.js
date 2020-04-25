@@ -78,13 +78,15 @@ playBtn.addEventListener("click", displayPlayToggle);
 
 
 let cards = [];
+let charCards = [];
+let defCards = [];
 
 function createCards(DICTIONARY) {
   let charCards = [];
   let defCards = [];
   const dictionary = DICTIONARY.slice();
   
-  for (let i = 0; i < 6; i++){
+  for (let i = 0; i < 8; i++){
     const length = dictionary.length;
     let card =  dictionary[Math.floor(Math.random() * length)];
     charCards.push({id: card.id, character:card.character});
@@ -114,34 +116,40 @@ function displayCards() {
   
   cards.charCards.map(card => {
     let board = document.getElementById("board");
+    let charCon = document.getElementById("char-container");
+    
     let char = document.createElement("div");
     
+    charCon.className = "char-container"
     char.id = card.id;
-    char.className = "charCard";
+    char.className = "card";
     ch = card.character;
     
     for (let i = 0; i < ch.length; i++) {
       const writer = HanziWriter.create(char, ch[i], {
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
         padding: 0
       });
-      board.appendChild(char);
+      charCon.appendChild(char)
     };
-    
+    board.append(charCon)
   });
 
   let shuffleDef = shuffle(cards.defCards); 
 
   shuffleDef.map(card => {
     let board = document.getElementById("board");
+    let defCon = document.getElementById("def-container");
     let def = document.createElement("div");
 
+    defCon.className = "def-container"
     def.id = card.id;
-    def.className = "defCard";
+    def.className = "card";
 
     def.innerHTML = card.definition;
-    board.appendChild(def)
+    defCon.appendChild(def)
+    board.appendChild(defCon)
   })
 };
 
@@ -159,8 +167,56 @@ function newGame() {
   // charCard.parentNode.removeChild(charCard);
   createCards(DICTIONARY);
   displayCards();
-  // console.log(cards);
+
+  board.addEventListener("click", e => {select(e)});
+ 
+};
+
+
+let currentCard;
+let nextCard;
+
+
+function select(e) {
+  selected = e.target;
   
+  if (e.target.classList.value === "card") {
+    e.target.classList.toggle("select")
+  }
+
+  if (!currentCard){
+    currentCard = selected;
+  } else {
+    nextCard = selected;
+  }
+  console.log(currentCard);
+  console.log(nextCard);
+  
+  if (currentCard && nextCard){
+    compare(currentCard, nextCard);
+    currentCard.classList.toggle("unselect");
+    nextCard.classList.toggle("unselect");
+    currentCard = null;
+    nextCard = null;
+  }
+};
+
+function compare(currentCard, nextCard) {
+  if (currentCard.id === nextCard.id){
+    console.log("match!");
+    currentCard.classList.toggle("match")
+    nextCard.classList.toggle("match");
+  } else {
+    console.log("no match");
+  }
+  
+};
+
+function match() {
+  if(currentCard === nextCard){
+    console.log("match!");
+    
+  }
 };
 
 
