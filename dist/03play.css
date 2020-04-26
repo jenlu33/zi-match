@@ -87,6 +87,7 @@
 }
 
 .hide {
+  pointer-events: none;
   border: 2px solid rgb(0, 0, 0);
   opacity: 0.1;
   transition-duration: 0.3s;

@@ -218,7 +218,7 @@ function compare(currentCard, nextCard) {
 };
 
 function endGame() {
-
+  
 };
 
 function restart() {
