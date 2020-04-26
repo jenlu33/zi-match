@@ -178,18 +178,19 @@ let nextCard;
 
 function select(e) {
   selected = e.target;
-  
-  if (e.target.classList.value === "card") {
-    e.target.classList.toggle("select")
-  }
-
-  if (!currentCard){
-    currentCard = selected;
+  let id = e.target.id;
+  newId = parseInt(id, 10);
+  if ( newId == false || Number.isNaN(newId) ) {
+    // console.log("not a number");
   } else {
-    nextCard = selected;
+    e.target.classList.toggle("select")
+    
+    if (!currentCard){
+      currentCard = selected;
+    } else {
+      nextCard = selected;
+    }
   }
-  console.log(currentCard);
-  console.log(nextCard);
   
   if (currentCard && nextCard){
     compare(currentCard, nextCard);
@@ -199,18 +200,21 @@ function select(e) {
 };
 
 function compare(currentCard, nextCard) {
-  if (currentCard.id === nextCard.id){
-    currentCard.classList.toggle("match")
-    nextCard.classList.toggle("match");
-  } else {
-    currentCard.classList.toggle("no-match");
-    nextCard.classList.toggle("no-match");
-    setTimeout(() => {
-      currentCard.classList.value = "card";
-      nextCard.classList.value = "card";
-    }, 500)
-  }
-  
+    if (currentCard.id === nextCard.id){
+      currentCard.classList.toggle("match");
+      nextCard.classList.toggle("match");
+      setTimeout(() => {
+        currentCard.classList.toggle("hide");
+        nextCard.classList.toggle("hide");
+      }, 500)
+    } else {
+      currentCard.classList.toggle("no-match");
+      nextCard.classList.toggle("no-match");
+      setTimeout(() => {
+        currentCard.classList.value = "card";
+        nextCard.classList.value = "card";
+      }, 500)
+    }
 };
 
 function endGame() {
