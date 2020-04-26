@@ -11,8 +11,10 @@
   /* border: 1px solid red; */
   height: 60vh;
   width: 85vw;
-  min-width: 500px;
+  /* max-width: 900px; */
+  min-width: 600px;
   display: flex;
+  justify-content: center;
 }
 
 #new-game-btn{
@@ -30,9 +32,18 @@
 
 #def-container, #char-container{
   /* border: 1px solid red; */
+  /* width: 40vw; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: flex-end; */
+}
+
+#def-container {
+  justify-content: flex-start;
+}
+
+#char-container {
+  justify-content: flex-end;
 }
 
 .card {
@@ -40,11 +51,10 @@
   border-radius: 5px;
   margin: 10px;
   padding: 5px;
-  height: 13vw;
-  width: 10vw;
-  min-height: 110px;
-  min-width: 90px;
-  max-height: 180px;
+  height: 9vw;
+  width: 11vw;
+  min-height: 80px;
+  min-width: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
