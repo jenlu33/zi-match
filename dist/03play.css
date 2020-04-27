@@ -32,10 +32,9 @@
 
 #def-container, #char-container{
   /* border: 1px solid red; */
-  width: 40vw;
+  width: 42vw;
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: flex-end; */
 }
 
 #def-container {
@@ -125,9 +124,4 @@
   background-color: rgb(71, 144, 255);
   color: white;
   text-align: center;
-}
-
-.close-modal {
-  color: black;
-  
 }
