@@ -172,6 +172,9 @@ function select(e) {
   selected = e.target;
   let id = e.target.id;
   newId = parseInt(id, 10);
+
+  console.log("click");
+  
   
   if ( newId == false || Number.isNaN(newId) ) {
     // console.log("not a number");
@@ -201,7 +204,7 @@ function compare(currentCard, nextCard) {
       nextCard.classList.toggle("hide");
     }, 500);
     count -= 1;
-    console.log(count);
+    // console.log(count);
     if (count === 0){
       endGame();
     }
@@ -216,7 +219,7 @@ function compare(currentCard, nextCard) {
 };
 
 function endGame() {
-  console.log("you win!");
+  // console.log("you win!");
   const modal = document.createElement("div");
   modal.className = "hide-modal";
   
