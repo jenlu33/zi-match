@@ -142,7 +142,7 @@ function displayCards() {
 
   let shuffleDef = shuffle(cards.defCards); 
 
-  const defCon = document.createElement("div")
+  const defCon = document.createElement("div");
   shuffleDef.map(card => {
     const def = document.createElement("div");
 
@@ -164,17 +164,13 @@ function startGame() {
 
   createCards(DICTIONARY);
   displayCards();
-  board.addEventListener("click", e => {select(e)});
-  
+  board.onclick = (e) => { select(e) };
 };
 
 function select(e) {
   selected = e.target;
   let id = e.target.id;
   newId = parseInt(id, 10);
-
-  console.log("click");
-  
   
   if ( newId == false || Number.isNaN(newId) ) {
     // console.log("not a number");
@@ -204,7 +200,6 @@ function compare(currentCard, nextCard) {
       nextCard.classList.toggle("hide");
     }, 500);
     count -= 1;
-    // console.log(count);
     if (count === 0){
       endGame();
     }
@@ -219,7 +214,6 @@ function compare(currentCard, nextCard) {
 };
 
 function endGame() {
-  // console.log("you win!");
   const modal = document.createElement("div");
   modal.className = "hide-modal";
   
@@ -244,8 +238,12 @@ function endGame() {
 
 function restart() {
   while (board.firstChild) {
-    board.removeChild(board.lastChild);
+    board.removeChild(board.lastChild)
   };
+  
+  cards = null;
+  charCards = [];
+  defCards = [];
   currentCard = null;
   nextCard = null;
   count = 0;
