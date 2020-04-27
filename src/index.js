@@ -94,7 +94,7 @@ function createCards(DICTIONARY) {
   let defCards = [];
   const dictionary = DICTIONARY.slice();
   
-  for (let i = 0; i < 9; i++){
+  for (let i = 0; i < 2; i++){
     const length = dictionary.length;
     let card =  dictionary[Math.floor(Math.random() * length)];
     charCards.push({id: card.id, character:card.character});
@@ -229,7 +229,7 @@ function endGame() {
   setTimeout(() => {
     
     modal.className = "show-modal";
-  }, 1000)
+  }, 900)
 
   window.onclick = (e) => {
     if (e.target === modal) {
