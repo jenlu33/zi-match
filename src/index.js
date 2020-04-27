@@ -33,6 +33,7 @@ function displayStudyWords(DICTIONARY) {
     
     dChar.className = "display-char"
     entry.className = "entry";
+    entry.id = "entry"
   
     chars = word.character;
     for(let i = 0; i < chars.length; i++) {
@@ -55,6 +56,7 @@ function displayStudyWords(DICTIONARY) {
     entry.appendChild(dPronounce);
     entry.appendChild(dDef);
     entries.appendChild(entry);
+    
   });
 };
 
@@ -66,6 +68,9 @@ let cards;
 let charCards = [];
 let defCards = [];
 // let ids = [];
+let currentCard;
+let nextCard;
+let count = 0;
 
 function clickedPlayToggle() {
   playBtn.classList.toggle("clicked");
@@ -95,6 +100,7 @@ function createCards(DICTIONARY) {
     charCards.push({id: card.id, character:card.character});
     defCards.push({ id: card.id, definition:card.definition});
     dictionary.splice(dictionary.indexOf(card), 1);
+    count ++;
   }
   cards = { charCards, defCards };
 };
@@ -159,16 +165,13 @@ function startGame() {
   createCards(DICTIONARY);
   displayCards();
   board.addEventListener("click", e => {select(e)});
+  
 };
-
-let currentCard;
-let nextCard;
 
 function select(e) {
   selected = e.target;
   let id = e.target.id;
   newId = parseInt(id, 10);
-  console.log(id);
   
   if ( newId == false || Number.isNaN(newId) ) {
     // console.log("not a number");
@@ -179,14 +182,14 @@ function select(e) {
       currentCard = selected;
     } else {
       nextCard = selected;
-    }
-  }
+    };
+  };
   
   if (currentCard && nextCard){
     compare(currentCard, nextCard);
     currentCard = null;
     nextCard = null;
-  }
+  };
 };
 
 function compare(currentCard, nextCard) {
@@ -196,18 +199,43 @@ function compare(currentCard, nextCard) {
     setTimeout(() => {
       currentCard.classList.toggle("hide");
       nextCard.classList.toggle("hide");
-    }, 500)
+    }, 500);
+    count -= 1;
+    console.log(count);
+    if (count === 0){
+      endGame();
+    }
   } else {
     currentCard.classList.toggle("no-match");
     nextCard.classList.toggle("no-match");
     setTimeout(() => {
       currentCard.classList.value = "card";
       nextCard.classList.value = "card";
-    }, 500)
-  }
+    }, 500);
+  };
 };
 
 function endGame() {
+  console.log("you win!");
+  const modal = document.createElement("div");
+  modal.className = "hide-modal";
+  
+  const modalContent = document.createElement("div");
+  modalContent.className = "modal-content";
+  modalContent.innerHTML = "Good job!"
+  
+  modal.appendChild(modalContent);
+  board.appendChild(modal);
+  setTimeout(() => {
+    
+    modal.className = "show-modal";
+  }, 1000)
+
+  window.onclick = (e) => {
+    if (e.target === modal) {
+      modal.className = "hide-modal";
+    }
+  }
 
 };
 
@@ -215,6 +243,9 @@ function restart() {
   while (board.firstChild) {
     board.removeChild(board.lastChild);
   };
+  currentCard = null;
+  nextCard = null;
+  count = 0;
 };
 
 
