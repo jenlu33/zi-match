@@ -32,7 +32,7 @@
 
 #def-container, #char-container{
   /* border: 1px solid red; */
-  /* width: 40vw; */
+  width: 40vw;
   display: flex;
   flex-wrap: wrap;
   /* justify-content: flex-end; */

@@ -4,7 +4,8 @@ const playBtn = document.getElementById('play-btn');
 const studying = document.getElementById('studying');
 const playing = document.getElementById('playing');
 const newGameBtn = document.getElementById('new-game-btn');
-const board = document.getElementById("board")
+const board = document.getElementById("board");
+
 
 // -------------- STUDY --------------
 
@@ -61,6 +62,11 @@ studyBtn.addEventListener("click", displayStudyWords(DICTIONARY));
 
 // -------------- PLAY --------------
 
+let cards;
+let charCards = [];
+let defCards = [];
+// let ids = [];
+
 function clickedPlayToggle() {
   playBtn.classList.toggle("clicked");
   playBtn.classList.toggle("option-btn");
@@ -78,10 +84,6 @@ function displayPlayToggle() {
 playBtn.addEventListener("click", displayPlayToggle);
 
 
-let cards = [];
-let charCards = [];
-let defCards = [];
-
 function createCards(DICTIONARY) {
   let charCards = [];
   let defCards = [];
@@ -92,14 +94,10 @@ function createCards(DICTIONARY) {
     let card =  dictionary[Math.floor(Math.random() * length)];
     charCards.push({id: card.id, character:card.character});
     defCards.push({ id: card.id, definition:card.definition});
-
     dictionary.splice(dictionary.indexOf(card), 1);
   }
   cards = { charCards, defCards };
-  return cards;
 };
-
-// playBtn.addEventListener("click", createCards(DICTIONARY));
 
 function shuffle(defCards){
   shuffled = defCards.slice(0);
@@ -115,11 +113,12 @@ function shuffle(defCards){
 
 function displayCards() {
   
+  const charCon = document.createElement("div");
   cards.charCards.map(card => {
-    const charCon = document.getElementById("char-container");
     const char = document.createElement("div");
     
-    charCon.className = "char-container"
+    charCon.id = "char-container";
+    charCon.className = "char-container";
     char.id = card.id;
     char.className = "card";
     ch = card.character;
@@ -130,48 +129,37 @@ function displayCards() {
         height: 25,
         padding: 0
       });
-      charCon.appendChild(char)
     };
-    board.append(charCon)
+    charCon.appendChild(char)
   });
+  board.append(charCon)
 
   let shuffleDef = shuffle(cards.defCards); 
 
+  const defCon = document.createElement("div")
   shuffleDef.map(card => {
-    const defCon = document.getElementById("def-container");
     const def = document.createElement("div");
 
-    defCon.className = "def-container"
+    defCon.id = "def-container";
+    defCon.className = "def-container";
     def.id = card.id;
     def.className = "card";
 
     def.innerHTML = card.definition;
     defCon.appendChild(def)
-    board.appendChild(defCon)
   })
+  board.appendChild(defCon)
 };
-
-// playBtn.addEventListener("click", displayCards(cards));
 
 function startGame() {
-  
-  
-  // if (document.getElementsByClassName("charCard")) {
-  //   charCard = document.getElementsByClassName("charCard");
-  //   charCard.parentNode = board;
-  //   console.log(charCard.parentNode);
-    
-  // }
-  // charCard.parentNode.removeChild(charCard);
+  if (document.getElementsByClassName("card") != undefined) {
+    restart();
+  }
+
   createCards(DICTIONARY);
   displayCards();
-
-  
   board.addEventListener("click", e => {select(e)});
- 
 };
-
-newGameBtn.addEventListener("click", startGame());
 
 let currentCard;
 let nextCard;
@@ -180,6 +168,8 @@ function select(e) {
   selected = e.target;
   let id = e.target.id;
   newId = parseInt(id, 10);
+  console.log(id);
+  
   if ( newId == false || Number.isNaN(newId) ) {
     // console.log("not a number");
   } else {
@@ -200,29 +190,31 @@ function select(e) {
 };
 
 function compare(currentCard, nextCard) {
-    if (currentCard.id === nextCard.id){
-      currentCard.classList.toggle("match");
-      nextCard.classList.toggle("match");
-      setTimeout(() => {
-        currentCard.classList.toggle("hide");
-        nextCard.classList.toggle("hide");
-      }, 500)
-    } else {
-      currentCard.classList.toggle("no-match");
-      nextCard.classList.toggle("no-match");
-      setTimeout(() => {
-        currentCard.classList.value = "card";
-        nextCard.classList.value = "card";
-      }, 500)
-    }
+  if (currentCard.id === nextCard.id){
+    currentCard.classList.toggle("match");
+    nextCard.classList.toggle("match");
+    setTimeout(() => {
+      currentCard.classList.toggle("hide");
+      nextCard.classList.toggle("hide");
+    }, 500)
+  } else {
+    currentCard.classList.toggle("no-match");
+    nextCard.classList.toggle("no-match");
+    setTimeout(() => {
+      currentCard.classList.value = "card";
+      nextCard.classList.value = "card";
+    }, 500)
+  }
 };
 
 function endGame() {
-  
+
 };
 
 function restart() {
-
+  while (board.firstChild) {
+    board.removeChild(board.lastChild);
+  };
 };
 
 
