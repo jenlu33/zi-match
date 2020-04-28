@@ -65,7 +65,7 @@
 
 .card:hover {
   cursor: pointer;
-  border: 2px solid grey;
+  box-shadow: 1px 1px 5px grey;
   transition-duration: 0.3s;
 }
 
