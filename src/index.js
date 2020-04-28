@@ -30,10 +30,14 @@ function displayStudyWords(DICTIONARY) {
     let entries = document.getElementById("entries");
     let dChar = document.createElement("div");
     let entry = document.createElement("div");
+    let entryFront = document.createElement("div");
+    let entryBack = document.createElement("div");
     
     dChar.className = "display-char"
-    entry.className = "entry";
-    entry.id = "entry"
+    entry.className = "entry"
+    entry.id = word.id;
+    entryFront.className = "entry-front";
+    entryBack.className = "entry-back";
   
     chars = word.character;
     for(let i = 0; i < chars.length; i++) {
@@ -42,7 +46,7 @@ function displayStudyWords(DICTIONARY) {
         height: 45,
         padding: 0
       });
-      entry.appendChild(dChar);
+      entryFront.appendChild(dChar);
     };
 
     let dDef = document.createElement("div");
@@ -53,14 +57,26 @@ function displayStudyWords(DICTIONARY) {
     dPronounce.className = "pronounciation";
     dPronounce.innerHTML = word.pronounciation;
 
-    entry.appendChild(dPronounce);
-    entry.appendChild(dDef);
+    entryFront.appendChild(dPronounce);
+    entryBack.appendChild(dDef);
+    entry.appendChild(entryFront);
+    entry.appendChild(entryBack);
     entries.appendChild(entry);
     
+    entry.onclick = () => {
+      flipStudy(entry, entryFront, entryBack)
+    }
   });
+  
 };
 
 studyBtn.addEventListener("click", displayStudyWords(DICTIONARY));
+
+function flipStudy(entry, entryFront, entryBack) {
+  entry.classList.toggle("entry-flip");
+  entryBack.classList.toggle("entry-display");
+  entryFront.classList.toggle("entry-hide")
+}
 
 // -------------- PLAY --------------
 
@@ -157,16 +173,6 @@ function displayCards() {
   board.appendChild(defCon)
 };
 
-function startGame() {
-  if (document.getElementsByClassName("card") != undefined) {
-    restart();
-  }
-
-  createCards(DICTIONARY);
-  displayCards();
-  board.onclick = (e) => { select(e) };
-};
-
 function select(e) {
   selected = e.target;
   let id = e.target.id;
@@ -211,6 +217,16 @@ function compare(currentCard, nextCard) {
       nextCard.classList.value = "card";
     }, 500);
   };
+};
+
+function startGame() {
+  if (document.getElementsByClassName("card") != undefined) {
+    restart();
+  }
+
+  createCards(DICTIONARY);
+  displayCards();
+  board.onclick = (e) => { select(e) };
 };
 
 function endGame() {
